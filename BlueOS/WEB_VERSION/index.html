@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+  <head>
+    <title>BlueOS</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, width=device-width, user-scalable=yes">
+    <!-- <link rel="stylesheet" href="styles.css"> -->
+  </head>
+  <body>
+	
+	<h1><b style="color:blue">Blue</b>OS</h1>
+	<b id="logged_in"></b>
+	<br>
+	<h3>Command 1</h3>
+	<input type="text" id="command_box">
+	<br>
+	<h3>Command 2</h3>
+	<input type="text" id="command_box_extra">
+	<button onclick="main()">Submit</button>
+	
+	
+	
+	<br>
+	<br>
+	<br>
+	
+	<b>BlueOS: </b><i id="command-line"></i>
+	
+	<script>
+		var logged_in = false;
+		
+		
+		function main() {
+			var extra = document.getElementById("command_box_extra").value;
+			var command = document.getElementById("command_box").value;
+			if (command === "say") {
+				document.getElementById("command-line").innerHTML = extra;
+			} else if (command === "help") {
+				document.getElementById("command-line").innerHTML = "help: shows help || say: Displays text set using \"Command 2\" text box || admin: logs you into the admin account || logout: logs you out of the admin account"
+			} else if (command === "admin") {
+				var user = prompt("Username:");
+				var pass = prompt("Password:");
+				if (user === "admin"){
+					var user_valid = true;
+				} else {
+					var user_valid = false;
+				}
+				if (pass === "password"){
+					var pass_valid = true;
+				} else {
+					var pass_valid = false;
+				}
+				if (user_valid && pass_valid === true) {
+					var logged_in = true;
+					document.getElementById("command-line").innerHTML = "Successfully logged in!";
+					document.getElementById("logged_in").innerHTML = "Logged into Admin account";
+				} else {
+					var logged_in = false;
+					document.getElementById("command-line").innerHTML = "Login failed, incorrect username or password.";
+				}
+			} else if (command === "logout") {
+					document.getElementById("logged_in").innerHTML = "";
+					document.getElementById("command-line").innerHTML = "Logged out successfully.";
+					var logged_in = false;
+			} else {
+				document.getElementById("command-line").innerHTML = "Not a valid command.";
+			}
+			
+			
+			
+			
+			<!-- document.getElementById("command-line").innerHTML = x; -->
+		}
+	
+	
+	</script>
+
+  </body>
+</html>
